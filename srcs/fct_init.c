@@ -73,7 +73,7 @@ int		init_var_list(t_list *l)
 	return (0);
 }
 
-t_list	*init_list(int ac)
+t_list	*init_list(void)
 {
 	t_list	*l;
 
@@ -91,6 +91,6 @@ t_list	*init_list(int ac)
 		return (0);
 	if (init_var_list(l) == 1)
 		return (0);
-	l->play = ac - 2;
+	//l->play = ac - 2;
 	return (l);
 }

@@ -92,8 +92,8 @@ int		start_game(t_list *l)
 	}
 	manage_sprite(l);
 	mlx_put_image_to_window(l->mlx, l->win, l->image, 0, 0);
-	if (l->play == 0)
-		mlx_destroy_image(l->mlx, l->image);
+	/*if (l->play == 0)
+		mlx_destroy_image(l->mlx, l->image);*/		//  -save
 	return (0);
 }
 
@@ -112,7 +112,7 @@ int		main(int ac, char **av)
 
 	if (manage_args(ac, av) == 1)
 		return (0);
-	if ((l = init_list(ac)) == 0)
+	if ((l = init_list()) == 0)
 		return (ft_failure(NULL, "Malloc probleme"));
 	manage_map(l, av);
 	if (l->nb_t < 5)
@@ -125,9 +125,9 @@ int		main(int ac, char **av)
 l->ray->resoy, "cube3d")))
 		return (ft_failure(l, "La fenetre ne s ouvre pas\n"));
 	manage_texture(l);
-	if (l->play == 1)
-		return (create_screenshot(l));
-	else
-		play_hook(l);
+	/*if (l->play == 1)
+		return (create_screenshot(l));		// -save
+	else*/
+	play_hook(l);
 	return (0);
 }

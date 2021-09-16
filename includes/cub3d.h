@@ -155,12 +155,12 @@ typedef struct		s_list
 	int				help;
 	int				life;
 	int				level;
-	int				play;
+	//int				play;		//-save
 }					t_list;
 
 int					manage_move(t_list *l);
 int					start_game(t_list *l);
-t_list				*init_list(int ac);
+t_list				*init_list(void);
 void				init_wall_var(t_list *l, int x);
 void				manage_hit_wall(t_list *l);
 void				manage_dir_wall(t_list *l);
@@ -177,8 +177,8 @@ void				free_l_map(t_list *l);
 void				manage_texture(t_list *l);
 int					manage_colors(char *colors, int res, int i);
 void				cal_life(t_list *l, int life, int i, int nb);
-int					create_bmp(t_list *l);
-int					create_screenshot(t_list *l);
+//int					create_bmp(t_list *l);		// -save
+//int					create_screenshot(t_list *l);		// -save
 void				key_free(t_list *l);
 int					manage_args(int ac, char **av);
 

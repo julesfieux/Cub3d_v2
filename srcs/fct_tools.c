@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int		ft_strcmp(char *s1, char *s2)
+/*int		ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int		ft_strcmp(char *s1, char *s2)
 	if (s2[i] != '\0')
 		return (1);
 	return (0);
-}
+}*/
 
 int		ft_failure(t_list *l, char *msg)
 {

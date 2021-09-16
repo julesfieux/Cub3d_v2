@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int							create_screenshot(t_list *l)
+/*int							create_screenshot(t_list *l)
 {
 	int						fd;
 
@@ -21,7 +21,7 @@ int							create_screenshot(t_list *l)
 	close(fd);
 	create_bmp(l);
 	return (1);
-}
+}*/
 
 /*
 ** Le codage de l’image se fait en écrivant successivement les bits
@@ -29,7 +29,7 @@ int							create_screenshot(t_list *l)
 ** bas à gauche.
 */
 
-void						get_pixels(t_list *l, int fd, int y)
+/*void						get_pixels(t_list *l, int fd, int y)
 {
 	unsigned char			rgb[3];
 	int						x;
@@ -51,7 +51,7 @@ void						get_pixels(t_list *l, int fd, int y)
 		}
 		y++;
 	}
-}
+}*/
 
 /*
 ** “L’entête du fichier fournit des informations sur le
@@ -67,7 +67,7 @@ void						get_pixels(t_list *l, int fd, int y)
 ** bmp_file_header[10] = adresse de la zone de définition de l’image
 */
 
-unsigned char				*create_file_header(int res_y, int res_x)
+/*unsigned char				*create_file_header(int res_y, int res_x)
 {
 	int						nb_octet;
 	static unsigned char	bmp_file_header[] = {
@@ -85,7 +85,7 @@ unsigned char				*create_file_header(int res_y, int res_x)
 	bmp_file_header[5] = (unsigned char)(nb_octet >> 24);
 	bmp_file_header[10] = (unsigned char)(54);
 	return (bmp_file_header);
-}
+}*/
 
 /*
 ** “L’entête de l’image fournit des informations sur l’image, notamment
@@ -97,7 +97,7 @@ unsigned char				*create_file_header(int res_y, int res_x)
 ** bmp_bitmap_header[14] = Nombre de bits par pixel (3 car rgb)
 */
 
-unsigned char				*create_bitmap_header(int res_y, int res_x)
+/*unsigned char				*create_bitmap_header(int res_y, int res_x)
 {
 	static unsigned char	bmp_bitmap_header[] = {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -116,7 +116,7 @@ unsigned char				*create_bitmap_header(int res_y, int res_x)
 	bmp_bitmap_header[12] = (unsigned char)(1);
 	bmp_bitmap_header[14] = (unsigned char)(3 * 8);
 	return (bmp_bitmap_header);
-}
+}*/
 
 /*
 ** 14 pour l’en-tête du fichier (BITMAPFILEHEADER)
@@ -124,7 +124,7 @@ unsigned char				*create_bitmap_header(int res_y, int res_x)
 ** O_WRONLY : ouverture du fichier en écriture seule
 */
 
-int							create_bmp(t_list *l)
+/*int							create_bmp(t_list *l)
 {
 	int						fd;
 	unsigned char			*file_header;
@@ -138,4 +138,4 @@ int							create_bmp(t_list *l)
 	get_pixels(l, fd, 0);
 	close(fd);
 	return (0);
-}
+}*/

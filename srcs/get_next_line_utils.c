@@ -20,7 +20,7 @@ char	*ft_strdup(char *s)
 	i = 0;
 	while (s[i])
 		i++;
-	if ((r = malloc(sizeof(char) * (i + 2))) == 0)
+	if ((r = malloc(sizeof(char) * (i + 2))) == 0)		// pk un "+2" et pas un "+1"
 		return (NULL);
 	i = 0;
 	while (s[i])
