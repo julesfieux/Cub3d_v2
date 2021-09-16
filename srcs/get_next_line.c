@@ -3,81 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 19:34:37 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/08 15:33:38 by rarihet          ###   ########.fr       */
+/*   Created: 2021/01/11 10:44:24 by jfieux            #+#    #+#             */
+/*   Updated: 2021/01/28 18:16:36 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		check_str(char *str, char **line)
+char	*ft_new_line(char *str)
 {
-	int	i;
+	int		i;
+	char	*res;
 
+	if (!str)
+		return (0);
 	i = 0;
-	while (str[i])
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (!(res = malloc(sizeof(char) * (i + 1))))
+		return (0);
+	i = 0;
+	while (str[i] && str[i] != '\n')
 	{
-		if (str[i] == '\n')
-		{
-			*line = ft_substr(str, 0, i);
-			return (i);
-		}
+		res[i] = str[i];
 		i++;
 	}
-	return (-1);
+	res[i] = '\0';
+	return (res);
 }
 
-int		manage_concl(char **line, char **str, int ret, int fd)
+char	*ft_new_save(char *str)
 {
-	char	*tmp;
+	int		i;
+	int		j;
+	char	*res;
 
-	if (ret < 0)
-		return (-1);
-	if ((ret = check_str(str[fd], line)) > 0)
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (!str[i])
 	{
-		tmp = str[fd];
-		str[fd] = ft_substr(str[fd], (ret + 1), \
-(ft_strlen(str[fd]) - (ret + 1)));
-		free(tmp);
-		return (1);
+		free(str);
+		return (0);
 	}
-	*line = ft_strdup(str[fd]);
-	free(str[fd]);
-	str[fd] = NULL;
-	return (0);
+	if (!(res = malloc(sizeof(char) * ((ft_strlen(str) - i) + 1))))
+		return (0);
+	i++;
+	j = 0;
+	while (str[i])
+		res[j++] = str[i++];
+	res[j] = '\0';
+	free(str);
+	return (res);
 }
 
-int		manage_sub(char **str, int fd, int ret)
+int		ft_mall_save(char **save)
 {
-	char *tmp;
-
-	tmp = str[fd];
-	str[fd] = ft_substr(str[fd], (ret + 1), (ft_strlen(str[fd]) - (ret + 1)));
-	free(tmp);
+	if (!*save)
+	{
+		if ((*save = malloc(sizeof(char) * 1)) == NULL)
+			return (-1);
+		*save[0] = '\0';
+	}
 	return (1);
 }
 
-int		get_next_line(int fd, char **line, int buff_size)
+int		get_next_line(int fd, char **line, int	buff_size)
 {
-	static char	*str[1024];
-	char		buff[buff_size + 1];
 	int			ret;
+	char		buf[buff_size + 1];
+	static char	*save;
 
-	if (!line || fd < 0 || buff_size <= 0)
+	ret = 1;
+	if (fd < 0 || !line || buff_size < 1)
 		return (-1);
-	if (str[fd] == NULL)
-		str[fd] = ft_strdup("");
-	if ((ret = check_str(str[fd], line)) >= 0)
-		return (manage_sub(str, fd, ret));
-	while ((ret = read(fd, buff, buff_size)) > 0)
+	if (ft_mall_save(&save) < 0)
+		return (-1);
+	while (ft_found_return(save) == 0 && ret != 0)
 	{
-		buff[ret] = '\0';
-		str[fd] = ft_strjoin(str[fd], buff);
-		ret = check_str(str[fd], line);
-		if (ret >= 0)
-			return (manage_sub(str, fd, ret));
+		if ((ret = read(fd, buf, buff_size)) == -1)
+		{
+			free(save);
+			return (-1);
+		}
+		buf[ret] = '\0';
+		save = ft_strjoin(save, buf);
 	}
-	return (manage_concl(line, str, ret, fd));
+	*line = ft_new_line(save);
+	save = ft_new_save(save);
+	if (ret == 0)
+		return (0);
+	return (1);
 }

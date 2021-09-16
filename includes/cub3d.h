@@ -190,7 +190,8 @@ int					how_long(int nb, int size);
 char				*ft_strdup(char *s);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_substr(char *s, unsigned int start, size_t len);
-char				*ft_strchr(char *s, int c);
+int					ft_found_return(char *str);
+//char				*ft_strchr(char *s, int c);		//gnl
 int					ft_strlen(char *s);
 int					get_next_line(int fd, char **line, int buff_size);
 void				ft_putstr(char *str);
