@@ -114,11 +114,16 @@ int		main(int ac, char **av)
 		return (0);
 	if ((l = init_list()) == 0)
 		return (ft_failure(NULL, "Malloc probleme"));
-	manage_map(l, av);
+	/*manage_map(l, av);
 	if (l->nb_t < 5)
 		return (ft_failure(l, "Il manque des textures\n"));
 	if (fill_info_mp(l) == 1)
-		return (ft_failure(l, "La map est mal faites\n"));
+		return (ft_failure(l, "La map est mal faites\n"));*/
+	if (ft_open_map(av[1], l) != 0)
+		return (ft_failure(l, "la map est mal faite"));
+	//printf("nbT = %d\n", nbT);
+	if (nbT < 5)
+		return (ft_failure(l, "le jeu a besoin de toute les textures ou aucune"));
 	if (((l->mlx = mlx_init()) == NULL))
 		return (ft_failure(l, "Probleme de minilibX\n"));
 	if (!(l->win = mlx_new_window(l->mlx, l->ray->resox, \
