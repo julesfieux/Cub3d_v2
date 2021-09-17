@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:06:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 13:24:49 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 17:43:53 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ int		init_var_list(t_list *l)
 {
 	if ((l->l_map->map = ft_substrdup("", 0, 1)) == NULL)
 		return (1);
+	l->l_map->size_map = 0;
 	l->l_map->fail = 0;
 	l->l_map->t_fl = 0;
 	l->l_map->s1 = 0;
 	l->l_map->s2 = 0;
-	l->nb_t = 0;
+	l->l_map->nb_line = 0;
+	l->nb_texture = 0;
 	l->nb_s = 0;
 	l->move_down = 0;
 	l->move_left = 0;

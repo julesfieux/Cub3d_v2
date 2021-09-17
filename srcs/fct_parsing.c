@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 16:26:49 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 17:50:30 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,55 @@ map[3] == '.' && ++l->nb_t && ++ord)
 		free(l->bonus);
 	return (0);
 }*/
+
+char *ft_strjoin_map(char *s1, char *s2)
+{
+    int i;
+    int j;
+    int k;
+    char *new;
+
+    i = 0;
+    j = 0;
+    k = 0;
+    if (s1 == NULL || s2 == NULL)
+        return (NULL);
+    while (s1[i] != '\0')
+        i++;
+    while (s2[j] != '\0')
+        j++;
+    if (!(new = malloc(sizeof(char) * (i + j + 2))))
+        return (NULL);
+    i = 0;
+    j = 0;
+    while (s1[i] != '\0')
+        new[k++] = s1[i++];
+    while (s2[j] != '\0')
+        new[k++] = s2[j++];
+    new[k] = '\n';
+    k += 1;
+    new[k] = '\0';
+    free(s1);
+    return (new);
+}
+
+int ft_check_map(char *line, t_list *info_game)
+{
+    int size;
+
+    //                                                             REMPLIR ALL TEXT BEFORE MAP
+    // if (info_game->info->tex_ea == NULL || )
+    size = ft_strlen(line);
+    if (size > info_game->l_map->size_map)
+        info_game->l_map->size_map = size;
+    // printf("taille de line = %d\n", info_game->max_size);
+    info_game->l_map->map = ft_strjoin_map(info_game->l_map->map, line);
+    if (!info_game->l_map->map)
+        return (-1);
+    info_game->l_map->nb_line++;
+    // printf("MAP SUR UNE LIGNE = |%s|\n", info_game->map_inline);
+    return (0);
+}
 
 int *fill_color(char *line)
 {
@@ -344,10 +393,7 @@ int ft_parsing(char *line, t_list *info_game)
         {
             ret = 2;
             if (ft_check_map(line, info_game) != 0)
-            {
-                printf("DANS CHECK MAP 1\n");
                 return (-1);
-            }
         }
         if (ret != 1)
             break;
@@ -358,6 +404,7 @@ int ft_parsing(char *line, t_list *info_game)
 
 int ft_read_map(int ret, char *line, int fd, t_list *info_game)
 {
+    info_game->l_map->map = malloc(sizeof(char) * 1);
     while ((ret = get_next_line(&line, fd, 1024)) == 1)
     {
         if (ft_strlen(line) > 0)

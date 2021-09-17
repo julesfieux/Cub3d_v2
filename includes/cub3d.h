@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 19:34:51 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 16:26:52 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 17:43:15 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_init_map
 	char			*s1_tex;
 	int				s2;
 	char			*s2_tex;
+	int				nb_line;
 	int				fail;
 }					t_init_map;
 
