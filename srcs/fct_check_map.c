@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:19:47 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/16 14:09:19 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 15:48:16 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		manage_line(t_list *l, char *reso, char *c_fl, char *c_ce)
+int		manage_line(t_list *l, char *reso)
 {
 	int		i;
 
@@ -33,8 +33,8 @@ int		manage_line(t_list *l, char *reso, char *c_fl, char *c_ce)
 	if (l->ray->resox <= 0 || l->ray->resox > 2560 || \
 l->ray->resoy <= 0 || l->ray->resoy > 1440)
 		return (1);
-	l->l_map->c_fl = manage_colors(c_fl, 0, 0);
-	l->l_map->c_ce = manage_colors(c_ce, 0, 0);
+	//l->l_map->c_fl = manage_colors(c_fl, 0, 0);		//parse
+	//l->l_map->c_ce = manage_colors(c_ce, 0, 0);		//parse
 	if (l->l_map->c_ce < 0 || l->l_map->c_fl < 0)
 		return (1);
 	return (0);
@@ -104,8 +104,7 @@ int		fill_info_mp(t_list *l)
 	l->perso->posy = 0;
 	if (check_map(l, map, 0) != 1)
 		return (1);
-	if (manage_line(l, l->l_map->reso, l->l_map->col_floor, \
-l->l_map->col_ceil) == 1)
+	if (manage_line(l, l->l_map->reso) == 1)
 		return (1);
 	if ((fill_sprite_info(l, map, 0)) == 1)
 		return (1);

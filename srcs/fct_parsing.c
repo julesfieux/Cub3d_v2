@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 13:24:47 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 16:26:49 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,87 @@ map[3] == '.' && ++l->nb_t && ++ord)
 	return (0);
 }*/
 
+int *fill_color(char *line)
+{
+    int i;
+    int *color;
+    int size_nb;
+
+    i = 0;
+    size_nb = 0;
+    // printf("LINE DANS FILL = |%s|\n", line);
+    if (!(color = malloc(sizeof(int) * 3)))
+        return (NULL);
+    while (line[i] != '\0' && !(line[i] >= '0' && line[i] <= '9'))
+        i++;
+    if (line[i] == '\0')
+        return (NULL);
+    // printf("1 = %c et %d\n", line[i], i);
+    color[0] = ft_atoi_size(&line[i], &size_nb);
+    if (!(color[0] >= 0 && color[0] <= 255))
+        return (NULL);
+    i += size_nb;
+    while (line[i] != '\0' && !(line[i] >= '0' && line[i] <= '9'))
+        i++;
+    if (line[i] == '\0')
+        return (NULL);
+    // printf("2 = %c et %d\n", line[i], i);
+    color[1] = ft_atoi_size(&line[i], &size_nb);
+    // printf("COLOR QUI BUG : |%d|\n", color[1]);
+    if (!(color[1] >= 0 && color[1] <= 255))
+        return (NULL);
+    // printf("deuxième couleur sol = |%d|\n", info_game->info->color_floor[1]);
+    i += size_nb;
+    while (line[i] != '\0' && !(line[i] >= '0' && line[i] <= '9'))
+        i++;
+    if (line[i] == '\0')
+        return (NULL);
+    // printf("2 = %c et %d\n", line[i], i);
+    color[2] = ft_atoi_size(&line[i], &size_nb);
+    if (!(color[2] >= 0 && color[0] <= 255))
+        return (NULL);
+    return (color);
+}
+
+int ft_check_color(char *line, t_list *info_game, int i, int let)
+{
+    int j;
+
+    while (line[i] != '\0' && line[i] == ' ')
+        i++;
+    if (line[i] == '\0')
+        return (-1);
+    j = 0;
+    while (line[i + j] != '\0' && line[i + j] != ' ')
+        j++;
+    if (let == 0)
+    {
+        if ((info_game->l_map->col_floor = fill_color(ft_substrdup(line, i, j))) == NULL)
+            return (-1);
+	    info_game->l_map->c_fl = 65280 * info_game->l_map->col_floor[0] + 255 * info_game->l_map->col_floor[1] + info_game->l_map->col_floor[2];
+        /*for (int k = 0; k < 3; k++)
+            printf("%d", info_game->l_map->col_floor[k]);
+        printf("\n");*/
+    }
+    else if (let == 1)
+    {
+        if ((info_game->l_map->col_ceil = fill_color(ft_substrdup(line, i, j))) == NULL)
+            return (-1);
+	    info_game->l_map->c_ce = 65280 * info_game->l_map->col_ceil[0] + 255 * info_game->l_map->col_ceil[1] + info_game->l_map->col_ceil[2];
+        /*for (int k = 0; k < 3; k++)
+            printf("%d", info_game->l_map->col_ceil[k]);
+        printf("\n");*/
+        }
+    i += j;
+    while (line[i] != '\0')
+    {
+        if (line[i] != ' ')
+            return (-1);
+        i++;
+    }
+    return (0);
+}
+
 void fill_tex(t_list *info_game, char *line, int let)
 {
     if (let == 0)
@@ -175,14 +256,14 @@ int ft_check_resolution(char *line, t_list *info_game)
     if (line[i] == '\0')
         return (-1);
     // printf("1 = %c et %d\n", line[i], i);
-    info_game->ray->resoX = ft_atoi_size(&line[i], &size_nb);
+    info_game->ray->resox = ft_atoi_size(&line[i], &size_nb);
     i += size_nb;
     while (line[i] != '\0' && !(line[i] >= '0' && line[i] <= '9'))
         i++;
     if (line[i] == '\0')
         return (-1);
     // printf("2 = %c et %d\n", line[i], i);
-    info_game->ray->resoY = ft_atoi_size(&line[i], &size_nb);
+    info_game->ray->resoy = ft_atoi_size(&line[i], &size_nb);
     i += size_nb;
     while (line[i] != '\0')
     {
@@ -228,19 +309,19 @@ int check_line(char *line, int i, t_list *info_game)
     }
     else if (line[i] == 'S' && line[i + 1] == ' ')
     {
-        if (ft_check_tex(line, info_game, 4, i + 2) != 0)
+        if (ft_check_tex(line, info_game, 4, i + 1) != 0)
             return (-1);
         return (2);
     }
     else if (line[i] == 'F' && line[i + 1] == ' ')
     {
-        if (ft_check_color(line, info_game, i + 2, 0) != 0)
+        if (ft_check_color(line, info_game, i + 1, 0) != 0)
             return (-1);
         return (2);
     }
     else if (line[i] == 'C' && line[i + 1] == ' ')
     {
-        if (ft_check_color(line, info_game, i + 2, 1) != 0)
+        if (ft_check_color(line, info_game, i + 1, 1) != 0)
             return (-1);
         return (2);
     }
@@ -258,10 +339,7 @@ int ft_parsing(char *line, t_list *info_game)
     {
 
         if ((ret = check_line(line, i, info_game)) == -1)
-        {
-            printf("DANS CHECK LINE 1\n");
             return (-1);
-        }
         if (line[i] == '1')
         {
             ret = 2;

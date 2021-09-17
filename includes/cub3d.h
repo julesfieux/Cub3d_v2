@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 19:34:51 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 13:24:51 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 16:26:52 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef struct		s_init_map
 	char			*t_we;
 	char			*t_ea;
 	char			*s_tex;
-	char			*col_floor;
+	int				*col_floor;
 	int				c_fl;
-	char			*col_ceil;
+	int				*col_ceil;
 	int				c_ce;
 	int				t_fl;
 	char			*fl_tex;
@@ -67,8 +67,8 @@ typedef struct		s_move
 	double			diry;
 	double			px;
 	double			py;
-	int				resoX;
-	int				resoY;
+	int				resox;
+	int				resoy;
 	double			camerax;
 	double			raydirx;
 	double			raydiry;

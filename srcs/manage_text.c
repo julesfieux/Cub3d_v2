@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   manage_text.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:25:32 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/17 04:05:29 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 15:51:25 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 
-int		check_color(char *colors)
+/*int		check_color(char *colors)
 {
 	int			col;
 	int			i;
@@ -31,9 +31,9 @@ int		check_color(char *colors)
 		i++;
 	col += ft_atoi(&colors[i]);
 	return (col);
-}
+}*/
 
-int		manage_colors(char *colors, int num, int i)
+/*int		manage_colors(char *colors, int num, int i)
 {
 	int	vir;
 	int nb_num;
@@ -60,7 +60,7 @@ int		manage_colors(char *colors, int num, int i)
 	if (vir != 2 && nb_num != 3)
 		return (-1);
 	return (check_color(colors));
-}
+}*/
 
 void	manage_tex_bonus(t_list *l)
 {
