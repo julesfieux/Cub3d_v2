@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:33:20 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/13 19:35:24 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 18:35:47 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		*ft_memcpy(void *dest, const void *src, size_t n)
 	return (cdest);
 }
 
-static char	**malloc_line_ft_split(char const *s, char c, char **r)
+/*static char	**malloc_line_ft_split(char const *s, char c, char **r)
 {
 	int		i;
 	int		k;
@@ -56,9 +56,9 @@ static char	**malloc_line_ft_split(char const *s, char c, char **r)
 	if ((r[k] = malloc(sizeof(char) * (j + 3))) == 0)
 		return (NULL);
 	return (r);
-}
+}*/
 
-static char	**malloc_ft_split(char const *s, char c, int i, int k)
+/*static char	**malloc_ft_split(char const *s, char c, int i, int k)
 {
 	char	**r;
 
@@ -79,9 +79,9 @@ static char	**malloc_ft_split(char const *s, char c, int i, int k)
 		return (NULL);
 	}
 	return (r);
-}
+}*/
 
-static char	**fill_ft_split(char const *s, char c, char **r, int i)
+/*static char	**fill_ft_split(char const *s, char c, char **r, int i)
 {
 	int		k;
 	int		j;
@@ -102,9 +102,9 @@ static char	**fill_ft_split(char const *s, char c, char **r, int i)
 		i++;
 	}
 	return (fill_end(r, j, k));
-}
+}*/
 
-char		**ft_split(char const *s, char c)
+/*char		**ft_split(char const *s, char c)
 {
 	char	**r;
 
@@ -114,4 +114,4 @@ char		**ft_split(char const *s, char c)
 		return (NULL);
 	r = fill_ft_split(s, c, r, 0);
 	return (r);
-}
+}*/

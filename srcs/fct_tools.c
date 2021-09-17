@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:13:00 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 13:04:36 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 18:41:38 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_failure(t_list *l, char *msg)
 	return (1);
 }
 
-int		how_long(int nb, int size)
+/*int		how_long(int nb, int size)
 {
 	int i;
 
@@ -51,7 +51,7 @@ int		how_long(int nb, int size)
 		i++;
 	}
 	return (i);
-}
+}*/
 
 void	ft_swap_double(double *n1, double *n2)
 {

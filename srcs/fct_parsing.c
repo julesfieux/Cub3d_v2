@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 17:50:30 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 18:46:53 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,77 @@ map[3] == '.' && ++l->nb_t && ++ord)
 		free(l->bonus);
 	return (0);
 }*/
+
+void	manage_start_n_s(char c, t_list *l)
+{
+	if (c == 'S')
+	{
+		l->ray->planeX = 0.0;
+		PLY = -0.66;
+		DIRX = 1.0;
+		DIRY = 0;
+	}
+	else if (c == 'N')
+	{
+		DIRX = -1.0;
+		DIRY = 0;
+		l->ray->planeX = 0.0;
+		PLY = 0.66;
+	}
+}
+
+void	manage_start_pos(char c, t_list *l)
+{
+	manage_start_n_s(c, l);
+	if (c == 'W')
+	{
+		l->ray->planeX = 0.66;
+		PLY = 0.0;
+		DIRX = 0.0;
+		DIRY = 1.0;
+	}
+	else if (c == 'E')
+	{
+		l->ray->planeX = -0.66;
+		PLY = 0.0;
+		DIRX = 0.0;
+		DIRY = -1.0;
+	}
+}
+
+int check_char_map(char *map, t_list *info_game)
+{
+    int i;
+    static int let = 0;
+    //                                                                    CHECK QUE LA FCT EST OK J AI PEUT ETRE OUBLIE UNE OU DEUX LETTRES
+    i = 0;
+    while (map[i] != '\0')
+    {
+        //printf("%c", map[i]);
+        if (map[i] != 'N' && map[i] != 'S' && map[i] != 'W' && map[i] != 'E' &&
+            map[i] != '0' && map[i] != '1' && map[i] != '2' && map[i] != '3' &&
+            map[i] != '4' && map[i] != '\n' && map[i] != ' ')
+            return (-1);
+        if (map[i] == 'N' || map[i] == 'S' || map[i] == 'W' || map[i] == 'E')
+        {
+            manage_start_pos(map[i], info_game);
+            //printf("let = %d\tmap[%d] = |%c|\n", let, i, map[i]);
+            let++;
+            if (let > 1)
+                return (-1);
+            info_game->perso->x = (i / (info_game->info->max_size + 1)) + .5;
+            info_game->perso->y = (i % (info_game->info->max_size + 1)) + .5;
+            //printf("i = %d\n", i);
+            //printf("max = %d\n", info_game->info->max_size);
+            //printf("X = %f\n", info_game->perso->x);
+            //printf("Y = %f\n", info_game->perso->y);
+        }
+        if (map[i] == '2')
+            info_game->nb_s++;
+        i++;
+    }
+    return (0);
+}
 
 char *ft_strjoin_map(char *s1, char *s2)
 {
@@ -411,7 +482,7 @@ int ft_read_map(int ret, char *line, int fd, t_list *info_game)
             if (ft_parsing(line, info_game) != 0)
                 return (-1);
     }
-    if (check_char_map(info_game->info->map_inline, info_game) != 0)
+    if (check_char_map(info_game->l_map->map, info_game) != 0)
         return (-1);
     printf("Tex NO = |%s|\n", info_game->info->tex_no);
     printf("Tex SO = |%s|\n", info_game->info->tex_so);

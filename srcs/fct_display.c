@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fct_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 18:33:14 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/17 04:54:35 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 18:35:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putstr(char *str)
 	write(1, str, i);
 }
 
-char	**fill_end(char **r, int j, int k)
+/*char	**fill_end(char **r, int j, int k)
 {
 	if (j > 0)
 	{
@@ -34,7 +34,7 @@ char	**fill_end(char **r, int j, int k)
 		r[k] = NULL;
 	r[k + 1] = NULL;
 	return (r);
-}
+}*/
 
 void	display_dead(t_list *l)
 {
