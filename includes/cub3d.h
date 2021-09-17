@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 19:34:51 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/17 05:15:06 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 13:24:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct		s_move
 	double			diry;
 	double			px;
 	double			py;
-	int				resox;
-	int				resoy;
+	int				resoX;
+	int				resoY;
 	double			camerax;
 	double			raydirx;
 	double			raydiry;
@@ -150,7 +150,8 @@ typedef struct		s_list
 	double			*zbuf;
 	char			**map_2d;
 	int				color;
-	int				nb_t;
+	//int				nb_t;		parse
+	int				nb_texture;
 	int				nb_s;
 	int				help;
 	int				life;
@@ -168,8 +169,9 @@ void				calc_wall_size(t_list *l);
 void				manage_sprite(t_list *l);
 void				manage_floor(t_list *l, int y, int p, double posz);
 void				dislay_wall_tex(t_list *l, double wallx, int start, int x);
-int					manage_each_line(t_list *l, char *map, int order);
-int					manage_map(t_list *l, char **av);
+//int					manage_each_line(t_list *l, char *map, int order);		//parse
+//int					manage_map(t_list *l, char **av);		//parse
+int 				ft_open_map(char *str, t_list *info_game);
 int					fill_info_mp(t_list *l);
 int					fill_sprite_info(t_list *l, char **map, int i);
 void				manage_start_pos(char **map, int x, int y, t_list *l);
@@ -186,10 +188,13 @@ void				ft_swap(int *n1, int *n2);
 void				ft_swap_double(double *n1, double *n2);
 int					ft_failure(t_list *l, char *msg);
 int					how_long(int nb, int size);
+int					ft_atoi_size(const char *str, int *size);
 
-char				*ft_strdup(char *s);
+
+//char				*ft_strdup(char *s);		//parse
+char				*ft_substrdup(char *str, int start, int size);
 char				*ft_strjoin(char *s1, char *s2);
-char				*ft_substr(char *s, unsigned int start, size_t len);
+//char				*ft_substr(char *s, unsigned int start, size_t len);		//parse
 int					ft_found_return(char *str);
 //char				*ft_strchr(char *s, int c);		//gnl
 int					ft_strlen(char *s);

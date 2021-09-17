@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fct_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/17 05:14:58 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 13:24:47 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,43 @@ map[3] == '.' && ++l->nb_t && ++ord)
 		free(l->bonus);
 	return (0);
 }*/
+
+void fill_tex(t_list *info_game, char *line, int let)
+{
+    if (let == 0)
+        info_game->l_map->t_no = line;
+    else if (let == 1)
+        info_game->l_map->t_so = line;
+    else if (let == 2)
+        info_game->l_map->t_we = line;
+    else if (let == 3)
+        info_game->l_map->t_ea = line;
+    else if (let == 4)
+        info_game->l_map->s_tex = line;
+}
+
+int ft_check_tex(char *line, t_list *info_game, int let, int i)
+{
+    int j;
+
+    while (line[i] != '\0' && line[i] == ' ')
+        i++;
+    if (line[i] == '\0')
+        return (-1);
+    j = 0;
+    while (line[i + j] != '\0' && line[i + j] != ' ')
+        j++;
+    fill_tex(info_game, ft_substrdup(line, i, j), let);
+    i += j;
+    while (line[i] != '\0')
+    {
+        if (line[i] != ' ')
+            return (-1);
+        i++;
+    }
+    info_game->nb_texture = info_game->nb_texture + 1;
+    return (0);
+}
 
 int ft_check_resolution(char *line, t_list *info_game)
 {

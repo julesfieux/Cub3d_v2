@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:44:51 by jfieux            #+#    #+#             */
-/*   Updated: 2021/09/16 15:36:37 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/17 13:12:43 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		ft_found_return(char *str)
 	return (0);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+/*char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*r;
@@ -109,4 +109,22 @@ char	*ft_strdup(char *s)
 	}
 	r[i] = '\0';
 	return (r);
+}*/
+
+char *ft_substrdup(char *str, int start, int size)
+{
+    char *s;
+    int i;
+
+    s = malloc(sizeof(char) * (size + 1));
+    if (!s)
+        return (NULL);
+    i = 0;
+    while (str[i] != '\0' && i < size)
+    {
+        s[i] = str[start + i];
+        i++;
+    }
+    s[i] = '\0';
+    return (s);
 }

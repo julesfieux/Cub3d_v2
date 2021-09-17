@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fct_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:06:49 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/17 04:05:29 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 13:24:49 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	manage_start_pos(char **map, int x, int y, t_list *l)
 
 int		init_var_list(t_list *l)
 {
-	if ((l->l_map->map = ft_strdup("")) == NULL)
+	if ((l->l_map->map = ft_substrdup("", 0, 1)) == NULL)
 		return (1);
 	l->l_map->fail = 0;
 	l->l_map->t_fl = 0;

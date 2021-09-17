@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fct_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarihet <rarihet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:13:00 by rarihet           #+#    #+#             */
-/*   Updated: 2020/01/17 05:04:03 by rarihet          ###   ########.fr       */
+/*   Updated: 2021/09/17 13:04:36 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void	ft_swap(int *n1, int *n2)
 	n3 = *n1;
 	*n1 = *n2;
 	*n2 = n3;
+}
+
+int ft_atoi_size(const char *str, int *size)
+{
+    int i;
+    int nb;
+    long sign;
+
+    i = 0;
+    nb = 0;
+    sign = 0;
+    while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+        i++;
+    if (str[i] == '-')
+        sign++;
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    while (str[i] >= '0' && str[i] <= '9')
+    {
+        nb = nb * 10 + (str[i] - '0');
+        i++;
+    }
+    *size = i;
+    if (sign == 1)
+        return (-nb);
+    return (nb);
 }
