@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 19:34:51 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/20 12:45:53 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 14:49:07 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ typedef struct		s_list
 	double			*zbuf;
 	char			**map_2d;
 	int				color;
-	//int				nb_t;		parse
+	//int				nb_t;		//parse
 	int				nb_texture;
 	int				nb_s;
 	int				help;

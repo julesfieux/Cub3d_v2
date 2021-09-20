@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/20 12:45:45 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 14:49:05 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int ft_fill_tab(t_list *info_game)
     {
         if (map_line[i] == '\n')
         {
-            while (k < info_game->info->max_size)
+            while (k < info_game->l_map->size_map)
             {
                 map[j][k] = ' ';
                 k++;
@@ -184,8 +184,8 @@ int ft_fill_tab(t_list *info_game)
             {
                 // printf("map[%d] = |%c|\n", i, map_line[i]);
                 // printf("Perso ?\n");
-                info_game->perso->x = j;
-                info_game->perso->y = k;
+                info_game->perso->posx = j;
+                info_game->perso->posy = k;
                 // printf("X= %d\n", k);
                 // printf("Y= %d\n", j);
             }
@@ -199,7 +199,7 @@ int ft_fill_tab(t_list *info_game)
     // printf("HORS DU WHILE\n");
     map[j] = NULL;
     info_game->map_2d = map;
-    free(map_line);
+    free(map_line);		//potentiel leak
     return (0);
 }
 
