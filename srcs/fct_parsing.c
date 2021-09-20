@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 18:46:53 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:29:19 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,17 @@ void	manage_start_n_s(char c, t_list *l)
 {
 	if (c == 'S')
 	{
-		l->ray->planeX = 0.0;
-		PLY = -0.66;
-		DIRX = 1.0;
-		DIRY = 0;
+		l->ray->px = 0.0;
+		l->ray->py = -0.66;
+		l->ray->dirx = 1.0;
+		l->ray->diry = 0;
 	}
 	else if (c == 'N')
 	{
-		DIRX = -1.0;
-		DIRY = 0;
-		l->ray->planeX = 0.0;
-		PLY = 0.66;
+		l->ray->dirx = -1.0;
+		l->ray->diry = 0;
+		l->ray->px = 0.0;
+		l->ray->py = 0.66;
 	}
 }
 
@@ -149,17 +149,17 @@ void	manage_start_pos(char c, t_list *l)
 	manage_start_n_s(c, l);
 	if (c == 'W')
 	{
-		l->ray->planeX = 0.66;
-		PLY = 0.0;
-		DIRX = 0.0;
-		DIRY = 1.0;
+		l->ray->px = 0.66;
+		l->ray->py = 0.0;
+		l->ray->dirx = 0.0;
+		l->ray->diry = 1.0;
 	}
 	else if (c == 'E')
 	{
-		l->ray->planeX = -0.66;
-		PLY = 0.0;
-		DIRX = 0.0;
-		DIRY = -1.0;
+		l->ray->px = -0.66;
+		l->ray->py = 0.0;
+		l->ray->dirx = 0.0;
+		l->ray->diry = -1.0;
 	}
 }
 
