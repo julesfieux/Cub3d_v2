@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 18:33:22 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/20 12:46:05 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 15:51:43 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		main(int ac, char **av)
 	if (ft_open_map(av[1], l) != 0)
 		return (ft_failure(l, "la map est mal faite"));
 	//printf("nbT = %d\n", nbT);
-	if (nbT < 5)
+	if (l->nb_texture < 5)
 		return (ft_failure(l, "le jeu a besoin de toute les textures ou aucune"));
 	if (((l->mlx = mlx_init()) == NULL))
 		return (ft_failure(l, "Probleme de minilibX\n"));
