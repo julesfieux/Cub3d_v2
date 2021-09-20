@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/20 15:35:40 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 15:38:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -742,9 +742,9 @@ int ft_read_map(int ret, char *line, int fd, t_list *info_game)
     if (check_border_map(info_game->map_2d, info_game->l_map->nb_line) != 0)
         return (-1);
 	//printf("JUSQUE LA TOUT EST OK\n");
-	info_game->Zbuf = malloc(sizeof(double) * info_game->ray->resoX);
-	info_game->perso->moveSpeed = 0.1;
-	info_game->perso->rotSpeed = 0.05;
+	info_game->zbuf = malloc(sizeof(double) * info_game->ray->resox);
+	info_game->perso->ms = 0.1;
+	info_game->perso->rots = 0.05;
 	//printf("TOUUUUUUTTTTT OK\n");
     return (0);
 }
