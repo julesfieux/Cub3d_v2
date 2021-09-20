@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/20 14:49:05 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 15:35:40 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,169 @@ map[3] == '.' && ++l->nb_t && ++ord)
 		free(l->bonus);
 	return (0);
 }*/
+
+int check_next_end_line(int f_space, int nb_one, char *next_line)
+{
+    int k;
+    int space;
+    int one;
+
+    k = ft_strlen(next_line) - 1;
+    space = 0;
+    while (next_line[k] == ' ')
+    {
+        space++;
+        k--;
+    }
+    if (space > f_space + nb_one)
+        return (-1);
+    one = 0;
+    while (next_line[k] == '1')
+    {
+        k--;
+        one++;
+    }
+    if (space + one <= f_space)
+        return (-1);
+    if (f_space + nb_one <= space)
+        return (-1);
+    // printf("space = %d\none = %d\n", space, one);
+    return (0);
+}
+
+int check_last_space(char *line, char *next_line)
+{
+    int i;
+    int f_space;
+    int nb_one;
+
+    i = ft_strlen(line) - 1;
+    f_space = 0;
+    nb_one = 0;
+    // printf("i = l[%d] = %c\n", i, line[i]);
+    // printf("Debut LAST check_nb_space\n");
+    while (line[i] == ' ')
+    {
+        i--;
+        f_space++;
+    }
+    while (line[i] == '1')
+    {
+        i--;
+        nb_one++;
+    }
+    return (check_next_end_line(f_space, nb_one, next_line));
+}
+
+int check_next_line(int f_space, int nb_one, char *next_line)
+{
+    int k;
+    int space;
+    int one;
+
+    k = 0;
+    space = 0;
+    while (next_line[k] == ' ')
+    {
+        space++;
+        k++;
+    }
+    if (space > f_space + nb_one)
+        return (-1);
+    one = 0;
+    while (next_line[k + one] == '1')
+        one++;
+    if (space + one <= f_space)
+        return (-1);
+    if (f_space + nb_one <= space)
+        return (-1);
+    // printf("space = %d\none = %d\n", space, one);
+    return (0);
+}
+
+int check_nb_space(char *line, char *next_line)
+{
+    int i;
+    int f_space;
+    int nb_one;
+
+    i = 0;
+    f_space = 0;
+    nb_one = 0;
+    // printf("Debut check_nb_space\n");
+    while (line[i] == ' ')
+    {
+        i++;
+        f_space++;
+    }
+    while (line[i] == '1')
+    {
+        i++;
+        nb_one++;
+    }
+    return (check_next_line(f_space, nb_one, next_line));
+}
+
+int map_exeption(char *first, char *last)
+{
+    int i;
+
+    i = 0;
+    while (first[i] != '\0')
+    {
+        if (first[i] != '1' && first[i] != ' ')
+            return (-1);
+        i++;
+    }
+    // printf("FIRST OK\n");
+    i = 0;
+    while (last[i] != '\0')
+    {
+        if (last[i] != '1' && last[i] != ' ')
+            return (-1);
+        i++;
+    }
+    //printf("EXEPTION OK\n");
+    // printf("LAST OK\n");
+    return (0);
+}
+
+int check_border_map(char **map, int nb_line)
+{
+    int j;
+    int space;
+    int one;
+
+    j = 0;
+    /*printf("%d\n", nb_line);
+    printf("DANS LE CHECK\n");
+    printf("map[0] = |%s|\n", map[0]);
+    printf("map[nb_line] = |%s|\n", map[nb_line - 1]);*/
+    if (map_exeption(map[0], map[nb_line - 1]) != 0)
+    {
+        //printf("MAP EXEPTION FAIL\n");
+        return (-1);
+    }
+    //printf("APRES LE CHECK\n");
+    while (map[j + 1] != NULL)
+    {
+        one = 0;
+        space = 0;
+        if (check_nb_space(map[j], map[j + 1]) != 0)
+        {
+            //printf("FAIL check nb space LIGNE N%d\n", j);
+            return (-1);
+        }
+        if (check_last_space(map[j], map[j + 1]) != 0)
+        {
+            //printf("FAIL LAST check nb space LIGNE N%d\n", j);
+            return (-1);
+        }
+        j++;
+    }
+    //printf("MAP FULLY OKKKKK\n");
+    return (0);
+}
 
 char **malloc_map(int nb_line, int line_size)
 {
@@ -575,17 +738,14 @@ int ft_read_map(int ret, char *line, int fd, t_list *info_game)
         return (-1);
     if ((fill_sprite_info(info_game, info_game->map_2d, 0)) == 1)
 		return (1);
-	printf("Fill tab ok\n");
-    if (check_border_map(info_game->map_2d, info_game->info->nb_line) != 0)
-    {
-        printf("Check border FAIL\n");
+	//printf("Fill tab ok\n");
+    if (check_border_map(info_game->map_2d, info_game->l_map->nb_line) != 0)
         return (-1);
-    }
-	printf("JUSQUE LA TOUT EST OK\n");
+	//printf("JUSQUE LA TOUT EST OK\n");
 	info_game->Zbuf = malloc(sizeof(double) * info_game->ray->resoX);
 	info_game->perso->moveSpeed = 0.1;
 	info_game->perso->rotSpeed = 0.05;
-	printf("TOUUUUUUTTTTT OK\n");
+	//printf("TOUUUUUUTTTTT OK\n");
     return (0);
 }
 
