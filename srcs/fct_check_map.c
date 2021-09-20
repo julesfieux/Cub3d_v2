@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:19:47 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 17:50:05 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:46:22 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		manage_line(t_list *l, char *reso)
+/*int		manage_line(t_list *l, char *reso)
 {
 	int		i;
 
@@ -38,9 +38,9 @@ l->ray->resoy <= 0 || l->ray->resoy > 1440)
 	if (l->l_map->c_ce < 0 || l->l_map->c_fl < 0)
 		return (1);
 	return (0);
-}
+}*/
 
-int		check_around(char **map, int y_max, int x_max)
+/*int		check_around(char **map, int y_max, int x_max)
 {
 	int i;
 
@@ -63,9 +63,9 @@ int		check_around(char **map, int y_max, int x_max)
 		i++;
 	}
 	return (0);
-}
+}*/
 
-int		check_map(t_list *l, char **map, int player)
+/*int		check_map(t_list *l, char **map, int player)
 {
 	int		y;
 	int		x;
@@ -92,9 +92,9 @@ map[y][x] == 'W' || map[y][x] == 'E')
 	if (check_around(map, y - 1, x - 1) != 0)
 		return (0);
 	return (player);
-}
+}*/
 
-int		fill_info_mp(t_list *l)
+/*int		fill_info_mp(t_list *l)
 {
 	char	**map;
 
@@ -113,7 +113,7 @@ int		fill_info_mp(t_list *l)
 	l->perso->ms = 0.1;
 	l->perso->rots = 0.05;
 	return (0);
-}
+}*/
 
 void	free_l_map(t_list *l)
 {

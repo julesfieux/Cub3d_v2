@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:06:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 17:43:53 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:45:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	manage_start_n_s(char **map, int x, int y, t_list *l)
+/*void	manage_start_n_s(char **map, int x, int y, t_list *l)
 {
 	if (map[y][x] == 'S')
 	{
@@ -28,9 +28,9 @@ void	manage_start_n_s(char **map, int x, int y, t_list *l)
 		l->ray->px = 0.0;
 		l->ray->py = 0.66;
 	}
-}
+}*/
 
-void	manage_start_pos(char **map, int x, int y, t_list *l)
+/*void	manage_start_pos(char **map, int x, int y, t_list *l)
 {
 	manage_start_n_s(map, x, y, l);
 	if (map[y][x] == 'W')
@@ -49,7 +49,7 @@ void	manage_start_pos(char **map, int x, int y, t_list *l)
 	}
 	l->perso->posx = y + .5;
 	l->perso->posy = x + .5;
-}
+}*/
 
 int		init_var_list(t_list *l)
 {

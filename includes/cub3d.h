@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 19:34:51 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/17 17:43:15 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:45:53 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void				dislay_wall_tex(t_list *l, double wallx, int start, int x);
 int 				ft_open_map(char *str, t_list *info_game);
 int					fill_info_mp(t_list *l);
 int					fill_sprite_info(t_list *l, char **map, int i);
-void				manage_start_pos(char **map, int x, int y, t_list *l);
+//void				manage_start_pos(char **map, int x, int y, t_list *l);
 void				free_l_map(t_list *l);
 void				manage_texture(t_list *l);
 int					manage_colors(char *colors, int res, int i);

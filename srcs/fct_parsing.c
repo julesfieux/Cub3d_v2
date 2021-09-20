@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:16:49 by rarihet           #+#    #+#             */
-/*   Updated: 2021/09/20 12:29:19 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:45:45 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,83 @@ map[3] == '.' && ++l->nb_t && ++ord)
 	return (0);
 }*/
 
+char **malloc_map(int nb_line, int line_size)
+{
+    int i;
+    char **map;
+
+    map = malloc(sizeof(char *) * (nb_line + 1));
+    if (!map)
+        return (NULL);
+    i = 0;
+    while (i < nb_line)
+    {
+        map[i] = malloc(sizeof(char) * (line_size + 1));
+        if (!map[i])
+            return (NULL);
+        i++;
+    }
+    return (map);
+}
+
+int ft_fill_tab(t_list *info_game)
+{
+    char **map;
+    char *map_line;
+    int i;
+    int j;
+    int k;
+
+    // printf("FILL TAB\n");
+    map_line = info_game->l_map->map;
+    info_game->l_map->nb_line++;		//je ne comprends pas pk
+    map = malloc_map(info_game->l_map->nb_line, info_game->l_map->size_map);
+    if (!map)
+        return (-1);
+    // printf("MALLOC MAP OK\n");
+    i = 0;
+    j = 0;
+    k = 0;
+    while (map_line[i] != '\0')
+    {
+        if (map_line[i] == '\n')
+        {
+            while (k < info_game->info->max_size)
+            {
+                map[j][k] = ' ';
+                k++;
+            }
+            // printf("SUR BACK\nK => %d == %d\n", k, info_game->info->max_size);
+            // printf("J => %d == %d\n", j, info_game->info->nb_line + 2);
+            map[j][k] = '\0';
+            j++;
+            k = -1;
+        }
+        else
+        {
+            if (map_line[i] == 'N' || map_line[i] == 'W' || map_line[i] == 'S' || map_line[i] == 'E')
+            {
+                // printf("map[%d] = |%c|\n", i, map_line[i]);
+                // printf("Perso ?\n");
+                info_game->perso->x = j;
+                info_game->perso->y = k;
+                // printf("X= %d\n", k);
+                // printf("Y= %d\n", j);
+            }
+            // printf("SUR LET\nK => %d == %d\n", k, info_game->info->max_size);
+            // printf("J => %d == %d\n", j, info_game->info->nb_line + 2);
+            map[j][k] = map_line[i];
+        }
+        i++;
+        k++;
+    }
+    // printf("HORS DU WHILE\n");
+    map[j] = NULL;
+    info_game->map_2d = map;
+    free(map_line);
+    return (0);
+}
+
 void	manage_start_n_s(char c, t_list *l)
 {
 	if (c == 'S')
@@ -183,8 +260,8 @@ int check_char_map(char *map, t_list *info_game)
             let++;
             if (let > 1)
                 return (-1);
-            info_game->perso->x = (i / (info_game->info->max_size + 1)) + .5;
-            info_game->perso->y = (i % (info_game->info->max_size + 1)) + .5;
+            info_game->perso->posx = (i / (info_game->l_map->size_map + 1)) + .5;
+            info_game->perso->posy = (i % (info_game->l_map->size_map + 1)) + .5;
             //printf("i = %d\n", i);
             //printf("max = %d\n", info_game->info->max_size);
             //printf("X = %f\n", info_game->perso->x);
@@ -484,7 +561,7 @@ int ft_read_map(int ret, char *line, int fd, t_list *info_game)
     }
     if (check_char_map(info_game->l_map->map, info_game) != 0)
         return (-1);
-    printf("Tex NO = |%s|\n", info_game->info->tex_no);
+    /*printf("Tex NO = |%s|\n", info_game->info->tex_no);
     printf("Tex SO = |%s|\n", info_game->info->tex_so);
     printf("Tex EA = |%s|\n", info_game->info->tex_ea);
     printf("Tex WE = |%s|\n", info_game->info->tex_we);
@@ -493,12 +570,9 @@ int ft_read_map(int ret, char *line, int fd, t_list *info_game)
     printf("Color plafond = |%d,%d,%d|\n", info_game->info->color_sky[0], info_game->info->color_sky[1], info_game->info->color_sky[2]);
     printf("MAP SUR UNE LIGNE = |%s|\n", info_game->info->map_inline);
     printf("Longeur de la plus grande ligne = |%d|\n", info_game->info->max_size);
-    printf("Nombre de ligne de la map = |%d|\n", info_game->info->nb_line);
+    printf("Nombre de ligne de la map = |%d|\n", info_game->info->nb_line);*/
     if (ft_fill_tab(info_game) != 0)
-    {
-        printf("Fill tab FAIL\n");
         return (-1);
-    }
     if ((fill_sprite_info(info_game, info_game->map_2d, 0)) == 1)
 		return (1);
 	printf("Fill tab ok\n");
